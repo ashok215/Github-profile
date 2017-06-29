@@ -8,17 +8,23 @@ import { GitService } from '../git.service';
 
 })
 export class ProfileComponent {
-   user: any[];
+   user: any;
    repos: any[];
+   username: string;
+
   constructor(private _gitService: GitService) {
-    this._gitService.getUser().subscribe(user => { this.user = user;
-    });
-    this._gitService.getRepo().subscribe(repos => { this.repos = repos;
-    });
+    this.user = false;
 
 
    }
 // tslint:disable-next-line:member-ordering
+searchuser() {
+    this._gitService.updateuser(this.username);
 
+   this._gitService.getUser().subscribe(user => { this.user = user;
+    });
+    this._gitService.getRepo().subscribe(repos => { this.repos = repos;
+    });
+}
 
 }
